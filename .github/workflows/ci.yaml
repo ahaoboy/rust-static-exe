@@ -18,8 +18,11 @@ jobs:
         with:
           toolchain: nightly
       - name: build
+        shell: powershell
         run: |
-          cargo build --release
+          $env:RUSTFLAGS="-C target-feature=+crt-static"
+          cargo build --target x86_64-pc-windows-msvc
+
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
