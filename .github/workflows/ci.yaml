@@ -27,4 +27,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: rust-static
-          path: ./target/release/rust-static.exe
+          path: ./target/x86_64-pc-windows-msvc/rust-static.exe
