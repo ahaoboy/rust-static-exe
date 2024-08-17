@@ -16,14 +16,15 @@ jobs:
       - name: Setup Rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
         with:
-          toolchain: nightly
+          toolchain: nightly-x86_64-pc-windows-gnu
       - name: build
         shell: powershell
         run: |
-          cargo build --target x86_64-pc-windows-msvc --release
+          $env:RUSTFLAGS="-C target-feature=+crt-static"
+          cargo build --target x86_64-pc-windows-gnu --release
 
       - name: Upload
         uses: actions/upload-artifact@v4
         with:
           name: rust-static
-          path: ./target/x86_64-pc-windows-msvc/release/rust-static.exe
+          path: ./target/*/release/rust-static.exe
